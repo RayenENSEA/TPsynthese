@@ -1,51 +1,44 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <sys/wait.h>
+
 
 # define BUFFER_SIZE 256
 
 int main() {
 	
     char *welcomeMessage = "Bienvenue dans le Shell ENSEA.\n Pour quitter, tapez 'exit'.\n";
-    
     char *prompt = "enseash %";
-    
     char *error = "Command not found\n";
-    
     char buffer[BUFFER_SIZE];
     
     int command_len;
+    int status;
     
     pid_t pid;
     
     write(STDOUT_FILENO, welcomeMessage, strlen(welcomeMessage));
     
-    while(1){
+    pid=fork();
+    
+
 		
 		write(STDOUT_FILENO, prompt, strlen(prompt));
 		
-		command_len=read(STDIN_FILENO, buffer, sizeof(buffer));
-		buffer[command_len-1]='\0';
+		if(pid==0){
+			command_len=read(STDIN_FILENO, buffer, sizeof(buffer));
+			buffer[command_len-1]='\0';
+			
+			execlp(buffer, buffer, NULL);
+			}
 		
-		pid=fork();
-		
-		execlp(buffer, buffer, NULL);
-		
-		if(strncmp(buffer, "ls", 2) == 0){
-			execl("/bin/ls", buffer, NULL);
-		}
-		
-		if(strncmp(buffer, "pwd", 3) == 0){
-			execl("/bin/pwd", buffer, NULL);
-		}
-		if(strncmp(buffer, "fortune", 7) == 0){
-			execl("/usr/games/fortune", buffer, NULL);
-		}
 		else{
+			wait(&status);
 			write(STDOUT_FILENO, error, strlen(error));
 		}
 			
-	}
+
 
     return 0;
 }
