@@ -14,13 +14,22 @@ int main() {
     
     char buffer[BUFFER_SIZE];
     
+    int command_len;
+    
+    pid_t pid;
+    
     write(STDOUT_FILENO, welcomeMessage, strlen(welcomeMessage));
     
     while(1){
 		
 		write(STDOUT_FILENO, prompt, strlen(prompt));
 		
-		read(STDIN_FILENO, buffer, sizeof(buffer));
+		command_len=read(STDIN_FILENO, buffer, sizeof(buffer));
+		buffer[command_len-1]='\0';
+		
+		pid=fork();
+		
+		execlp(buffer, buffer, NULL);
 		
 		if(strncmp(buffer, "ls", 2) == 0){
 			execl("/bin/ls", buffer, NULL);
