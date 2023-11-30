@@ -27,7 +27,7 @@ int main() {
 		write(STDOUT_FILENO, prompt, strlen(prompt));
 		command_len=read(STDIN_FILENO, buffer, sizeof(buffer));
 		buffer[command_len-1]='\0';
-		if(strncmp(buffer,"exit",5)==0){
+		if(strncmp(buffer,"exit",4)==0){
 			write(STDOUT_FILENO, bye, strlen(bye));
 		}
 		else{
