@@ -1,15 +1,12 @@
 #include <unistd.h>
 #include <string.h>
+#include <stdio.h>
 
 int main() {
 	
-    // welcome message
-    write(STDOUT_FILENO, "Bienvenue dans le Shell ENSEA.\n", strlen("Bienvenue dans le Shell ENSEA.\n"));
-    write(STDOUT_FILENO, "Pour quitter, tapez 'exit'.\n", strlen("Pour quitter, tapez 'exit'.\n"));
-
-    // prompt
-    write(STDOUT_FILENO, "enseash % ", strlen("enseash % "));
-
+    char *buffer = "Bienvenue dans le Shell ENSEA.\n Pour quitter, tapez 'exit'.\n enseash %";
+    
+    write(STDOUT_FILENO, buffer, strlen(buffer));
 
     return 0;
 }
