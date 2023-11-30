@@ -28,7 +28,7 @@ int main() {
 		buffer[command_len-1]='\0';
 		
 		execlp(buffer, buffer, NULL);
-		perror("Command not found\n");
+		write(STDOUT_FILENO, error, strlen(error));
 	}
 
 	else{
