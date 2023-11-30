@@ -24,6 +24,15 @@ int main() {
 			execl("/bin/ls", buffer, NULL);
 		}
 		
+		if(strncmp(buffer, "pwd", 3) == 0){
+			execl("/bin/pwd", buffer, NULL);
+		}
+		if(strncmp(buffer, "fortune", 7) == 0){
+			execl("/bin/fortune", buffer, NULL);
+		}
+		else{
+			write(STDOUT_FILENO, prompt, strlen(prompt));
+		}
 			
 	}
 
