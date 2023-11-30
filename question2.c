@@ -10,6 +10,8 @@ int main() {
     
     char *prompt = "enseash %";
     
+    char *error = "Command not found\n";
+    
     char buffer[BUFFER_SIZE];
     
     write(STDOUT_FILENO, welcomeMessage, strlen(welcomeMessage));
@@ -28,10 +30,10 @@ int main() {
 			execl("/bin/pwd", buffer, NULL);
 		}
 		if(strncmp(buffer, "fortune", 7) == 0){
-			execl("/bin/fortune", buffer, NULL);
+			execl("/usr/games/fortune", buffer, NULL);
 		}
 		else{
-			write(STDOUT_FILENO, prompt, strlen(prompt));
+			write(STDOUT_FILENO, error, strlen(error));
 		}
 			
 	}
