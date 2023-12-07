@@ -17,27 +17,30 @@ int main() {
 	int command_len;
 	int status;
 	    
-	pid_t pid;
-	    
 	write(STDOUT_FILENO, welcomeMessage, strlen(welcomeMessage));
+	
+	while(1){
 	    
-	pid=fork();
-			
-	if(pid==0){
-		write(STDOUT_FILENO, prompt, strlen(prompt));
-		command_len=read(STDIN_FILENO, buffer, sizeof(buffer));
-		buffer[command_len-1]='\0';
-		if(strncmp(buffer,"exit",4)==0){
-			write(STDOUT_FILENO, bye, strlen(bye));
+	    pid_t pid;
+		pid=fork();
+	
+		if(pid==0){
+			write(STDOUT_FILENO, prompt, strlen(prompt));
+			command_len=read(STDIN_FILENO, buffer, sizeof(buffer));
+			buffer[command_len-1]='\0';
+			if(strncmp(buffer,"exit",4)==0){
+				write(STDOUT_FILENO, bye, strlen(bye));
+				return 0;
+			}
+			else{
+				execlp(buffer, buffer, NULL);
+				write(STDOUT_FILENO, error, strlen(error));
+			}
 		}
-		else{
-			execlp(buffer, buffer, NULL);
-			write(STDOUT_FILENO, error, strlen(error));
-		}
-	}
 
-	else{
-		wait(&status);
+		else{
+			wait(&status);
+		}
 	}
 	return 0;
 }
