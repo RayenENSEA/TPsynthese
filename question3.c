@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 
 
@@ -20,26 +21,29 @@ int main() {
 	write(STDOUT_FILENO, welcomeMessage, strlen(welcomeMessage));
 	
 	while(1){
+		
+		write(STDOUT_FILENO, prompt, strlen(prompt));
+		command_len=read(STDIN_FILENO, buffer, sizeof(buffer));
+		buffer[command_len-1]='\0';
+		if(strncmp(buffer,"exit",4)==0){
+			write(STDOUT_FILENO, bye, strlen(bye));
+			exit(EXIT_SUCCESS);
+		}
 	    
 	    pid_t pid;
 		pid=fork();
 	
 		if(pid==0){
-			write(STDOUT_FILENO, prompt, strlen(prompt));
-			command_len=read(STDIN_FILENO, buffer, sizeof(buffer));
-			buffer[command_len-1]='\0';
-			if(strncmp(buffer,"exit",4)==0){
-				write(STDOUT_FILENO, bye, strlen(bye));
-				return 0;
-			}
-			else{
+			
 				execlp(buffer, buffer, NULL);
 				write(STDOUT_FILENO, error, strlen(error));
-			}
+				exit(EXIT_FAILURE);
+			
 		}
 
 		else{
 			wait(&status);
+
 		}
 	}
 	return 0;
