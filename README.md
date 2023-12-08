@@ -45,5 +45,3 @@
       Le shell crée alors un dossier "nouveau" à l'emplacement indiqué dans le terminal.
 
 
-### Question 7 : 
-      oui
