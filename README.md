@@ -8,7 +8,7 @@
 
 
 ### Question 2 : 
-      Le shell est désormais capable d'exécuter n'importe quellle simple commande saisie (sans arguement).
+      Le shell est désormais capable d'exécuter n'importe quellle commande simple saisie (sans arguement).
       Création d'une boucle "while(1)" pour demander continuellement une commande.
       Création d'un processus fils en utilisant la fonction "fork()".  
       Celui-ci va exécuter la commande à l'aide de "execlp".
@@ -32,10 +32,15 @@
       Nous mesurons le temps d'exécution de la commande saisie.
       Il correspond au temps écoulé entre deux points dans le temps.
       Il est mesuré en utilisant la structure "timespec" de la bibliothèque "<time.h>".
+      Par exemple, la commande "fortune" prend plus de temps qu'un simple "pwd".
 
 
 ### Question 6 : 
-      oui
+      Le shell est désormais capable d'exécuter n'importe quellle commande saisie, même complexe avec des arguements.
+      Le code commence par prendre une commande stockée dans le buffer.
+      Il la découpe ensuite en arguments distincts grace à la fonction "strtok".
+      Enfin, il exécute la commande à l'aide de la fonction execvp. 
+      
       Exemple d'exécution de commande complexe : mkdir nouveau.
       Le shell crée alors un dossier "nouveau" à l'emplacement indiqué dans le terminal.
 
