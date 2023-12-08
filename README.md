@@ -29,11 +29,15 @@
 
 
 ### Question 5 : 
-      oui
+      Nous mesurons le temps d'exécution de la commande saisie.
+      Il correspond au temps écoulé entre deux points dans le temps.
+      Il est mesuré en utilisant la structure "timespec" de la bibliothèque "<time.h>".
 
 
 ### Question 6 : 
       oui
+      Exemple d'exécution de commande complexe : mkdir nouveau.
+      Le shell crée alors un dossier "nouveau" à l'emplacement indiqué dans le terminal.
 
 
 ### Question 7 : 
