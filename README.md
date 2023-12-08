@@ -1,5 +1,8 @@
 # TPsynthese : ENSEA in the shell
 
+Lotfi HENNI
+Rayen BEN AMAR
+
 ### Question 1 : 
       Nous affichons un message d'accueil simple à l'aide de la fonction write. 
       Celle-ci est utlisée pour écrire des données, elle remplace la fonction printf.
