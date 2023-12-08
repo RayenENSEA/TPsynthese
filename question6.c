@@ -41,21 +41,23 @@ int main() {
         pid=fork();
     
         if(pid==0){
-            //  strtok divise la commande en tokens
-            char *token = strtok(buffer, " ");
-            char *args[10];  // ajuste la taille en fonction du nombre maximum d'arguments
+            
+            char *token = strtok(buffer, " "); 	//   strtok divides the command into tokens
+            char *args[10];  // adjust the size based on the maximum number of arguments
             int arg_count = 0;
+            
+            // fill the args array with tokens obtained from the command string
             while (token != NULL && arg_count < 9) {
                 args[arg_count++] = token;
                 token = strtok(NULL, " ");
             }
-            args[arg_count] = NULL;  // marqueur de fin pour execlp
+            args[arg_count] = NULL;  // null terminator for execlp
             
-            execvp(args[0], args); // le tableau args contient à la fois la commande et les arguments associés
+            execvp(args[0], args); // the args array contains both the command and associated arguments
             
             // execlp(argv[1],argv[2], NULL); // cette écriture permetrait d'éxécuter une commande complexe dès l'éxécution avec "int argc, char *argv[]"
             
-            // dans le cas où execvp échoue
+            // in case execvp fails
             write(STDOUT_FILENO, error, strlen(error));
             exit(EXIT_FAILURE);    
         }
