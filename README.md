@@ -48,4 +48,12 @@ Rayen BEN AMAR
       Exemple d'exécution de commande complexe : mkdir nouveau.
       Le shell crée alors un dossier "nouveau" à l'emplacement indiqué dans le terminal.
 
+### Question 7 : 
+      
+      Le shell a été étendu pour prendre en charge la redirection des flux d'entrée et de sortie. 
+      Lorsqu'une commande est saisie, le programme analyse les arguments pour détecter la présence des symboles de redirection '<' et '>'. 
+      Si '<' est trouvé, le shell redirige l'entrée standard "STDIN" vers le fichier spécifié. 
+      De même, si '>', le shell redirige la sortie standard "STDOUT" vers le fichier indiqué. 
+      Par exemple, la commande "wc -l < filetext.txt" compte les lignes du contenu du fichier "filetext.txt".
+
 
