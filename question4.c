@@ -25,7 +25,7 @@ int main() {
 	
 	while(1){
 		if(i==0){
-			write(STDOUT_FILENO, prompt, strlen(prompt));
+			write(STDOUT_FILENO, prompt, strlen(prompt)); 	// display the shell prompt initially
 		}
 		command_len=read(STDIN_FILENO, buffer, sizeof(buffer));
 		buffer[command_len-1]='\0';
@@ -34,7 +34,7 @@ int main() {
 			exit(EXIT_SUCCESS);
 		}
 	    
-	        pid_t pid;
+	    pid_t pid;
 		pid=fork();
 	
 		if(pid==0){
@@ -45,16 +45,17 @@ int main() {
 			
 		}
 
-		else{
+		else{ 	// entering the parent process
 			waitpid(pid, &status, 0);
-			if(WIFEXITED(status)){
+			
+			if(WIFEXITED(status)){ 		// if the child process exited normally
 				snprintf(status_exit,100,"enseash [exit:%d] %%", WEXITSTATUS(status));
-				write(STDOUT_FILENO, status_exit, strlen(status_exit));
+				write(STDOUT_FILENO, status_exit, strlen(status_exit)); 	// display the exit status
 					
 			}
-			else if(WIFSIGNALED(status)){
+			else if(WIFSIGNALED(status)){ 	// if the child process was terminated by a signal
 				snprintf(status_sign,100,"enseash [sign:%d] %%", WTERMSIG(status));
-				write(STDOUT_FILENO, status_sign, strlen(status_sign));
+				write(STDOUT_FILENO, status_sign, strlen(status_sign)); 	// display signal
 					
 			}
 		}
