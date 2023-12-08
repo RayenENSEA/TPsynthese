@@ -36,7 +36,7 @@ int main() {
 			exit(EXIT_SUCCESS);
 		}
 		struct timespec start, end;
-	    	clock_gettime(CLOCK_MONOTONIC, &start);
+	    	clock_gettime(CLOCK_MONOTONIC, &start); 	// record the start time
 	        pid_t pid;
 		pid=fork();
 	
@@ -48,10 +48,10 @@ int main() {
 
 		else{
 			waitpid(pid, &status, 0);
-			clock_gettime(CLOCK_MONOTONIC, &end);
-			seconds = end.tv_sec - start.tv_sec;
+			clock_gettime(CLOCK_MONOTONIC, &end); 	// record the end time
+			seconds = end.tv_sec - start.tv_sec; 	// calculate the difference between the time components in seconds of end and start
 			nanoseconds = end.tv_nsec - start.tv_nsec;
-    			elapsed = seconds*1000 + nanoseconds/1e6;
+    		elapsed = seconds*1000 + nanoseconds/1e6; 	// total time elapsed converted to milliseconds
 			if(WIFEXITED(status)){
 				snprintf(status_exit,100,"enseash [exit:%d | %ld ms] %%", WEXITSTATUS(status),elapsed);
 				write(STDOUT_FILENO, status_exit, strlen(status_exit));
