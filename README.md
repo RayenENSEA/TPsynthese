@@ -22,7 +22,10 @@
 
 
 ### Question 4 : 
-      oui
+      Le shell affiche maintenant le code de retour de la commande précédente.
+      Nous vérifions si le processus enfant s'est terminé normalement avec "WIFEXITED(status)", on affiche alors le statut de sortie.
+      Si le processus enfant a été interrompu par un signal (WIFSIGNALED), on affiche le signal et le numéro associé. 
+      Cela permet de capturer des informations sur le signal qui a provoqué l'interruption.
 
 
 ### Question 5 : 
